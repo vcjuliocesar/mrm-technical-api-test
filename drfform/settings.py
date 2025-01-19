@@ -84,14 +84,21 @@ WSGI_APPLICATION = 'drfform.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_vehicles',
-        'USER':'admin',
-        'PASSWORD':'admin123',
-        'HOST':'localhost',
-        'PORT':'5432',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'vehicles-db',
+        'USER': 'admin',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1', 
+        'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
