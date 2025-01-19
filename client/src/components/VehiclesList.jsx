@@ -8,7 +8,8 @@ export function VehiclesList() {
     useEffect(() => {
         async function loadVehicles() {
             const response = await getAllVehicles()
-            setVehicles(response)
+            const filtrated = response.filter(v => v.status == true)
+            setVehicles(filtrated)
         }
         loadVehicles()
     }, [])
