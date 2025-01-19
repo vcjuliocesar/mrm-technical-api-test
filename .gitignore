@@ -358,3 +358,14 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,python,django,visualstudiocode
 .env
+
+# React (dentro de client)
+client/node_modules/
+client/dist/
+client/.vite/
+
+# Logs
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/pnpm-debug.log*
