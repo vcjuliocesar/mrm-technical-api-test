@@ -1,5 +1,7 @@
+import { VehiclesList } from '../components/VehiclesList'
+
 export function VehiclesPage() {
     return (
-        <div>Vehicles Page</div>
+        <VehiclesList/>
     )
 }
