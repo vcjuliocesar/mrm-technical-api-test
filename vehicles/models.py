@@ -9,3 +9,9 @@ class Vehicle(models.Model):
     vehicle_model = models.CharField(max_length = 100)
     price = models.DecimalField(max_digits = 10,decimal_places=2)
     status = models.BooleanField(default=True)
+
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['brand','name','year'],name='unique_vehicle')
+        ]
