@@ -30,6 +30,29 @@ export const getVehicle = async (id) => {
 
 }
 
+export const search = async (context) => {
+
+    if (!context) {
+        throw new Error('Invalid search parameter')
+    }
+
+    try {
+        const api = await fetch(`${url}?search=${context}`)
+
+        if (!api.ok) {
+            throw new Error(`HTTP error! Status:${api.status}`)
+        }
+
+        const response = await api.json()
+
+        return response
+    } catch (error) {
+        console.log('Error creating vehicle:', error)
+        throw error
+    }
+
+}
+
 export const createVehicle = async (vehicle) => {
 
     if (!vehicle || typeof vehicle !== 'object') {
