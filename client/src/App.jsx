@@ -11,6 +11,7 @@ function App() {
         <Route path="/" element={<Navigate to="/vehicles" />} />
         <Route path='/vehicles' element={<VehiclesPage />} />
         <Route path='/vehicles-create' element={<VehicleFormPage />} />
+        <Route path='/vehicles/:id' element={<VehicleFormPage />} />
       </Routes>
     </BrowserRouter>
   )

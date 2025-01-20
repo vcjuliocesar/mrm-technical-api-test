@@ -1,6 +1,14 @@
+import {useNavigate} from 'react-router-dom'
+
 export function VehicleCard({vehicle}) {
+
+    const navigate = useNavigate()
     return (
-        <div>
+        <div
+            onClick={() => {
+                navigate(`/vehicles/${vehicle.id}`)
+            }}
+        >
             <h1>{vehicle.brand}</h1>
             <p>{vehicle.name}</p>
             <p>{vehicle.year}</p>

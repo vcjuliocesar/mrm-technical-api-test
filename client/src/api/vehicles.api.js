@@ -22,7 +22,7 @@ export const createVehicle = async (vehicle) => {
             body: JSON.stringify(vehicle)
         })
 
-        if(!api.ok){
+        if (!api.ok) {
             throw new Error(`HTTP error! Status:${api.status}`)
         }
 
@@ -30,6 +30,26 @@ export const createVehicle = async (vehicle) => {
         return response
     } catch (error) {
         console.log('Error creating vehicle:', error)
+        throw error
+    }
+}
+
+export const deleteVehicle = async (id) => {
+    if (!id) {
+        throw new Error('Invalid id')
+    }
+
+    try {
+        const api = await fetch(`${url + id}/`, {
+            method: 'DELETE'
+        })
+
+        if (!api.ok) {
+            throw Error(`HTTP error! Status:${api.status}`)
+        }
+        
+    } catch (error) {
+        console.log(error)
         throw error
     }
 }

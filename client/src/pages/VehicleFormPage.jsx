@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { createVehicle } from '../api/vehicles.api'
+import { useNavigate, useParams } from 'react-router-dom'
+import { createVehicle, deleteVehicle } from '../api/vehicles.api'
 
 export function VehicleFormPage() {
 
@@ -14,6 +14,8 @@ export function VehicleFormPage() {
     })
 
     const navigate = useNavigate()
+
+    const params = useParams()
 
     const [error, setError] = useState(false)
 
@@ -69,6 +71,14 @@ export function VehicleFormPage() {
                 <input type="checkbox" name="status" checked={status} onChange={handleInputChange} />
                 <button>Save</button>
             </form>
+            {params.id && <button onClick={() => {
+                const accepted = window.confirm("are you sure?")
+                if (accepted) {
+                    deleteVehicle(params.id)
+                    navigate('/vehicles')
+                }
+
+            }}>Delete</button>}
         </div>
     )
 }
