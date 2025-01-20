@@ -6,7 +6,7 @@ export function Navigation() {
             <Link to="/vehicles">
                 <h1>Vehicles Form</h1>
             </Link>
-            <Link to="/vehicle-create">create vehicle</Link>
+            <Link to="/vehicles-create">create vehicle</Link>
         </div>
     )
 }
