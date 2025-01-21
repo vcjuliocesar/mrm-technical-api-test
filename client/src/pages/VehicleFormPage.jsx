@@ -1,9 +1,19 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
+import { useBrand } from '../hooks/useBrand'
 import { createVehicle, deleteVehicle, updateVehicle, getVehicle, errorHandler } from '../api/vehicles.api'
 
 export function VehicleFormPage() {
+
+    const OPTIONS = [
+        { value: 'Buick', label: 'Buick' },
+        { value: 'Chevrolet', label: 'Chevrolet' },
+        { value: 'Cadillac', label: 'Cadillac' },
+        { value: 'GMC', label: 'GMC' },
+    ]
+
+    const [brands, SelectBrand] = useBrand('', OPTIONS)
 
     const [formData, setFormData] = useState({
         brand: '',
@@ -118,9 +128,19 @@ export function VehicleFormPage() {
             <form
                 onSubmit={submitVehicle}>
                 <div className='field'>
-                    <label className='label' htmlFor="Name">Brand</label>
+                    <label className='label' htmlFor="Brand">Brand</label>
                     <div className='control'>
-                        <input className='input' type="text" name="brand" placeholder="Brand" value={brand} onChange={handleInputChange} />
+                        <div className='select'>
+                            <select
+                                name="brand"
+                                value={brand}
+                                onChange={handleInputChange}>
+                                <option value="">-- Select brand --</option>
+                                {OPTIONS.map(option => (
+                                    <option key={option.value} value={option.value}>{option.label}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div className='field'>
@@ -130,19 +150,19 @@ export function VehicleFormPage() {
                     </div>
                 </div>
                 <div className='field'>
-                    <label className='label' htmlFor="Name">Year</label>
+                    <label className='label' htmlFor="Year">Year</label>
                     <div className='control'>
-                        <input className='input' type="number" name="year" placeholder="Year" value={year} onChange={handleInputChange} />
+                        <input className='input' type="number" name="year" placeholder="Year" value={year} onChange={handleInputChange}/>
                     </div>
                 </div>
                 <div className='field'>
-                    <label className='label' htmlFor="Name">Model</label>
+                    <label className='label' htmlFor="Model">Model</label>
                     <div className='control'>
                         <input className='input' type="text" name="vehicle_model" placeholder="Model" value={vehicle_model} onChange={handleInputChange} />
                     </div>
                 </div>
                 <div className='field'>
-                    <label className='label' htmlFor="Name">Price</label>
+                    <label className='label' htmlFor="Price">Price</label>
                     <div className='control'>
                         <input className='input' type="text" name="price" placeholder="Price" value={price} onChange={handleInputChange} />
                     </div>
@@ -163,19 +183,29 @@ export function VehicleFormPage() {
                     </p>
                 </div>
             </form>
-            
+
             {params.id && <button className='button is-danger is-pulled-right' onClick={() => {
                 const accepted = window.confirm("are you sure?")
                 if (accepted) {
-                    deleteVehicle(params.id)
-                    toast.success('vehicle deleted', {
-                        position: 'top-right',
-                        style: {
-                            background: '#101010',
-                            color: '#fff'
-                        }
-                    })
-                    navigate('/vehicles')
+                    deleteVehicle(params.id).then(() => {
+                        toast.success('vehicle deleted', {
+                            position: 'top-right',
+                            style: {
+                                background: '#101010',
+                                color: '#fff'
+                            }
+                        })
+                        navigate('/vehicles')
+                    }).catch(
+                        error => toast.error(`Error deleting vehicle:\n${errorHandler(error)}`, {
+                            position: 'top-right',
+                            style: {
+                                background: '#101010',
+                                color: '#fff'
+                            }
+                        })
+                    )
+
                 }
 
             }}>Delete</button>}

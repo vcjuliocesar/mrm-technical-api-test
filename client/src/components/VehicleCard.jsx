@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 export function VehicleCard({ vehicle }) {
 
     const navigate = useNavigate()
+    
     return (
         <div className='column'>
             <div
@@ -20,9 +21,8 @@ export function VehicleCard({ vehicle }) {
                         <p>Year: {vehicle.year}</p>
                         <p>Model: {vehicle.vehicle_model}</p>
                         <p>Price: ${vehicle.price}</p>
-                        <p>Status: {vehicle.status}</p>
+                        <p>Status: {vehicle.status ? <span>Active</span>:<span>Inactive</span>}</p>
                     </div>
-                    {/* <h1 className='title is-4'>{vehicle.brand}</h1> */}
                 </div>
 
             </div>
