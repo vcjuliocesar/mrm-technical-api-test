@@ -9,7 +9,8 @@ function App() {
   return (
     <SearchProvider>
       <BrowserRouter>
-        <Navigation />
+      <div className='container'>
+      <Navigation />
         <Routes>
           <Route path="/" element={<Navigate to="/vehicles" />} />
           <Route path='/vehicles' element={<VehiclesPage />} />
@@ -17,6 +18,7 @@ function App() {
           <Route path='/vehicles/:id' element={<VehicleFormPage />} />
         </Routes>
         <Toaster/>
+      </div>
       </BrowserRouter>
     </SearchProvider>
 

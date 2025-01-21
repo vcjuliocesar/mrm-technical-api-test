@@ -5,9 +5,12 @@ import { VehiclesList } from '../components/VehiclesList'
 export function VehiclesPage() {
     return (
         <>
-            <SearchForm/>
-            <VehiclesList/>
+            <div className='box'>
+                <SearchForm />
+            </div>
+            <div className='box'>
+                <VehiclesList />
+            </div>
         </>
-       
     )
 }

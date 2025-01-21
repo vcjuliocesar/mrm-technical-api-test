@@ -112,20 +112,59 @@ export function VehicleFormPage() {
     }
 
     return (
-        <div>
-            <h2>Crear Vehiculo</h2>
+        <div className='container'>
+            <h2>Create Vehicle</h2>
             {error ? <p>Todos los campos son obligatorios</p> : null}
             <form
                 onSubmit={submitVehicle}>
-                <input type="text" name="brand" placeholder="Brand" value={brand} onChange={handleInputChange} />
-                <input type="text" name="name" placeholder="Name" value={name} onChange={handleInputChange} />
-                <input type="number" name="year" placeholder="Year" value={year} onChange={handleInputChange} />
-                <input type="text" name="vehicle_model" placeholder="Model" value={vehicle_model} onChange={handleInputChange} />
-                <input type="text" name="price" placeholder="Price" value={price} onChange={handleInputChange} />
-                <input type="checkbox" name="status" checked={formData.status} onChange={handleInputChange} />
-                <button>Save</button>
+                <div className='field'>
+                    <label className='label' htmlFor="Name">Brand</label>
+                    <div className='control'>
+                        <input className='input' type="text" name="brand" placeholder="Brand" value={brand} onChange={handleInputChange} />
+                    </div>
+                </div>
+                <div className='field'>
+                    <label className='label' htmlFor="Name">Name</label>
+                    <div className='control'>
+                        <input className='input' type="text" name="name" placeholder="Name" value={name} onChange={handleInputChange} />
+                    </div>
+                </div>
+                <div className='field'>
+                    <label className='label' htmlFor="Name">Year</label>
+                    <div className='control'>
+                        <input className='input' type="number" name="year" placeholder="Year" value={year} onChange={handleInputChange} />
+                    </div>
+                </div>
+                <div className='field'>
+                    <label className='label' htmlFor="Name">Model</label>
+                    <div className='control'>
+                        <input className='input' type="text" name="vehicle_model" placeholder="Model" value={vehicle_model} onChange={handleInputChange} />
+                    </div>
+                </div>
+                <div className='field'>
+                    <label className='label' htmlFor="Name">Price</label>
+                    <div className='control'>
+                        <input className='input' type="text" name="price" placeholder="Price" value={price} onChange={handleInputChange} />
+                    </div>
+                </div>
+                <div className='field'>
+                    <div className='control'>
+                        <label className="checkbox">
+                            <input type="checkbox" name="status" checked={formData.status} onChange={handleInputChange} />
+                            Active
+                        </label>
+                    </div>
+                </div>
+                <div className='field'>
+                    <p className='control'>
+                        <button className='button is-link'>
+                            Save
+                        </button>
+                    </p>
+                </div>
             </form>
-            {params.id && <button onClick={() => {
+            
+            {params.id && <button className='button is-danger is-pulled-right' onClick={() => {
                 const accepted = window.confirm("are you sure?")
                 if (accepted) {
                     deleteVehicle(params.id)

@@ -13,7 +13,7 @@ export function VehiclesList() {
     useEffect(() => {
         async function loadVehicles() {
             const response = await getAllVehicles()
-            const response_filtared = filtrated(response)   
+            const response_filtared = filtrated(response)
             setVehicles(response_filtared)
             setAllVehicles(response_filtared)
         }
@@ -31,13 +31,18 @@ export function VehiclesList() {
     };
 
     return (
-        <div>
-            <div style={{ marginBottom: '1rem' }}>
-                <button onClick={handleShowAll}>Mostrar todos los vehículos</button>
+        <div className='content'>
+            <div className='block'>
+                <button className='button is-primary is-inverted' onClick={handleShowAll}>Show all vehicles</button>
             </div>
-            {vehicles.map(vehicle => (
-                <VehicleCard key={vehicle.id} vehicle={vehicle} />
-            ))}
+            <div className='block'>
+                <div className='columns'>
+                    {vehicles.map(vehicle => (
+                        <VehicleCard key={vehicle.id} vehicle={vehicle} />
+                    ))}
+                </div>
+            </div>
+
         </div>
     )
 }

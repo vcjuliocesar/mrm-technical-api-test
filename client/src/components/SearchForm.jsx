@@ -39,10 +39,16 @@ export function SearchForm() {
     }
 
     return (
-        <div>
+        <div className='content'>
             <form onSubmit={submitSeach}>
-                <input type="text" name="search" placeholder="search..." value={formData.search}  onChange={handleInputChange} />
-                <button> search</button>
+                <div className='field has-addons'>
+                    <div className='control is-expanded'>
+                        <input className='input' type="text" name="search" placeholder="search..." value={formData.search} onChange={handleInputChange} />
+                    </div>
+                    <div className='control'>
+                        <button className='button is-primary'> search</button>
+                    </div>
+                </div>
             </form>
         </div>
     )
