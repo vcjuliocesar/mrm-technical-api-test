@@ -39,7 +39,16 @@ export function VehicleFormPage() {
     }, [])
 
     const handleInputChange = (e) => {
-        const { name, value, type, checked } = e.target
+        let { name, value, type, checked } = e.target
+        const sanitizedValue = value.replace(/[^0-9.]/g, "")
+        const parts = sanitizedValue.split(".")
+        if (name == 'price') {
+            if (parts.length > 2) {
+                value = parts[0] + "." + parts[1];
+            } else {
+                value = sanitizedValue;
+            }
+        }
         setFormData({
             ...formData,
             [name]: type === "checkbox" ? checked : value,
@@ -149,7 +158,7 @@ export function VehicleFormPage() {
                 <div className='field'>
                     <label className='label' htmlFor="Year">Year</label>
                     <div className='control'>
-                        <input className='input' type="number" name="year" placeholder="Year" value={year} onChange={handleInputChange}/>
+                        <input className='input' type="number" name="year" placeholder="Year" value={year} onChange={handleInputChange} />
                     </div>
                 </div>
                 <div className='field'>
