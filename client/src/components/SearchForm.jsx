@@ -41,7 +41,7 @@ export function SearchForm() {
     return (
         <div>
             <form onSubmit={submitSeach}>
-                <input type="text" name="search" placeholder="search..."  onChange={handleInputChange} />
+                <input type="text" name="search" placeholder="search..." value={formData.search}  onChange={handleInputChange} />
                 <button> search</button>
             </form>
         </div>

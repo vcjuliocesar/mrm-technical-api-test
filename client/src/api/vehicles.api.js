@@ -69,7 +69,8 @@ export const createVehicle = async (vehicle) => {
         })
 
         if (!api.ok) {
-            throw new Error(`HTTP error! Status:${api.status}`)
+            const errorText = await api.text()
+            throw new Error(`HTTP error! Status:${api.status} - ${errorText}`)
         }
 
         const response = await api.json()
@@ -115,7 +116,8 @@ export const updateVehicle = async (id, vehicle) => {
         })
 
         if (!api.ok) {
-            throw Error(`HTTP error! Status:${api.status}`)
+            const errorText = await api.text()
+            throw Error(`HTTP error! Status:${api.status} - ${errorText}`)
         }
 
         const response = await api.json()
@@ -124,5 +126,25 @@ export const updateVehicle = async (id, vehicle) => {
     } catch (error) {
         console.log(error)
         throw error;
+    }
+}
+
+export const errorHandler = (error) => {
+    if (error.message && error.message.includes('HTTP error!')) {
+        let generalError = ''
+        try {
+            const errorDetails = JSON.parse(error.message.split(' - ')[1])
+
+            const errorMessages = Object.entries(errorDetails)
+                .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
+                .join('\n')
+                return errorMessages
+        } catch (parseError) {
+            generalError = 'An unexpected error occurred. Please try again.'
+            return generalError
+        }
+    } else {
+        generalError = 'An unexpected error occurred. Please try again.'
+        return
     }
 }

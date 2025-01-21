@@ -3,6 +3,7 @@ import { VehiclesPage } from './pages/VehiclesPage'
 import { VehicleFormPage } from './pages/VehicleFormPage'
 import { Navigation } from './components/Navigation'
 import { SearchProvider } from './context/SearchContext'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/vehicles-create' element={<VehicleFormPage />} />
           <Route path='/vehicles/:id' element={<VehicleFormPage />} />
         </Routes>
+        <Toaster/>
       </BrowserRouter>
     </SearchProvider>
 

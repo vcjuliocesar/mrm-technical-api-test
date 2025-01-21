@@ -1,6 +1,7 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { createVehicle, deleteVehicle, updateVehicle,getVehicle } from '../api/vehicles.api'
+import { toast } from 'react-hot-toast'
+import { createVehicle, deleteVehicle, updateVehicle, getVehicle, errorHandler } from '../api/vehicles.api'
 
 export function VehicleFormPage() {
 
@@ -21,14 +22,14 @@ export function VehicleFormPage() {
 
     useEffect(() => {
         async function loadVehicle() {
-            if(params.id){
-             const response = await getVehicle(params.id)
-             setFormData({...response})
+            if (params.id) {
+                const response = await getVehicle(params.id)
+                setFormData({ ...response })
             }
         }
 
         loadVehicle()
-    },[])
+    }, [])
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target
@@ -54,20 +55,60 @@ export function VehicleFormPage() {
 
         setError(false)
         if (params.id) {
-            updateVehicle(params.id,formData)
+            updateVehicle(params.id, formData).then(() => {
+                toast.success('vehicle updated', {
+                    position: 'top-right',
+                    style: {
+                        background: '#101010',
+                        color: '#fff'
+                    }
+                })
+                navigate('/vehicles')
+                setFormData({
+                    brand: '',
+                    name: '',
+                    year: '',
+                    vehicle_model: '',
+                    price: '',
+                    status: false,
+                })
+            }).catch(
+                error => toast.error(`Error updating vehicle:\n${errorHandler(error)}`, {
+                    position: 'top-right',
+                    style: {
+                        background: '#101010',
+                        color: '#fff'
+                    }
+                })
+            )
         } else {
-            createVehicle(formData)
+            createVehicle(formData).then(() => {
+                toast.success('vehicle created', {
+                    position: 'top-right',
+                    style: {
+                        background: '#101010',
+                        color: '#fff'
+                    }
+                })
+                navigate('/vehicles')
+                setFormData({
+                    brand: '',
+                    name: '',
+                    year: '',
+                    vehicle_model: '',
+                    price: '',
+                    status: false,
+                })
+            }).catch(
+                error => toast.error(`Error creating vehicle:\n${errorHandler(error)}`, {
+                    position: 'top-right',
+                    style: {
+                        background: '#101010',
+                        color: '#fff'
+                    }
+                })
+            )
         }
-
-        navigate('/vehicles')
-        setFormData({
-            brand: '',
-            name: '',
-            year: '',
-            vehicle_model: '',
-            price: '',
-            status: false,
-        })
     }
 
     return (
@@ -88,6 +129,13 @@ export function VehicleFormPage() {
                 const accepted = window.confirm("are you sure?")
                 if (accepted) {
                     deleteVehicle(params.id)
+                    toast.success('vehicle deleted', {
+                        position: 'top-right',
+                        style: {
+                            background: '#101010',
+                            color: '#fff'
+                        }
+                    })
                     navigate('/vehicles')
                 }
 
