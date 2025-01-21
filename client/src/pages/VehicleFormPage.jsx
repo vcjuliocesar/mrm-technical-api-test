@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
-import { useBrand } from '../hooks/useBrand'
 import { createVehicle, deleteVehicle, updateVehicle, getVehicle, errorHandler } from '../api/vehicles.api'
 
 export function VehicleFormPage() {
@@ -12,8 +11,6 @@ export function VehicleFormPage() {
         { value: 'Cadillac', label: 'Cadillac' },
         { value: 'GMC', label: 'GMC' },
     ]
-
-    const [brands, SelectBrand] = useBrand('', OPTIONS)
 
     const [formData, setFormData] = useState({
         brand: '',
