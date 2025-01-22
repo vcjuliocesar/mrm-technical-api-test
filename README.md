@@ -30,6 +30,7 @@ git@github.com:vcjuliocesar/mrm-technical-api-test.git
 añada sus variables de entorno
 
 **Ejemplo**
+```sh
 #DATABASE
 DB_NAME=my_database
 DB_USER=root
@@ -39,7 +40,7 @@ DB_PORT=5432
 
 #CLIENT
 HOST_CLIENT=http://localhost:8080
-
+```
 Es importante que tengas python,pip y postgresql instalados en tu ordenador
 
 **Crear un entorno virtual**
